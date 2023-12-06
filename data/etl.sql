@@ -1,5 +1,5 @@
 -- How to use this file:
--- Make sure three .csv files are in the same folder with the right names. Change file path according to your file structure.
+-- Make sure three .csv files are somewhere in you local machine. Change file path according to your file structure.
 -- Connect to your PostgreSQL database using psql:
 --   psql -U your_username -d your_database (* make sure the database has been created already)
 -- Execute the script using the \i command in psql:
