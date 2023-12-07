@@ -7,8 +7,15 @@ async function getAll(req, res) {
   res.send(data);
 }
 
-async function  createOne(req, res) {
-  res.send('Sanity');
+async function createOne(req, res) {
+  const { body, name, email, product_id } = req.body;
+  const data = await Questions.createOne({
+    productId: product_id,
+    body,
+    askerName: name,
+    askerEmail: email
+  });
+  res.send(data);
 }
 
 async function getAllAnswersOfQuestion(req, res) {

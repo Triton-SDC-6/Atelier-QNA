@@ -55,8 +55,19 @@ async function getAll(productId, page, count) {
 }
 
 async function createOne(questionBody) {
-  const questionQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email) VALUES() RETURNING *`;
+  const questionQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email) VALUES($1, $2, $3, $4, $5) RETURNING *`;
+  const { productId, body, askerName = 'Anonymous', askerEmail } = questionBody;
+  const dateWritten = new Date().toISOString();
+  const response = await pool.query(questionQuery, [
+    productId,
+    body,
+    dateWritten,
+    askerName,
+    askerEmail
+  ]);
+  return response.rows;
 }
 
 module.exports.pool = pool;
 module.exports.getAll = getAll;
+module.exports.createOne = createOne;
