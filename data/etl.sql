@@ -88,3 +88,9 @@ DROP TABLE temp_answers;
 SELECT setval('questions_id_seq', (SELECT MAX(id) FROM questions));
 SELECT setval('answers_id_seq', (SELECT MAX(id) FROM answers));
 SELECT setval('answers_photos_id_seq', (SELECT MAX(id) FROM answers_photos));
+
+-- Add indexes to improve query performance
+CREATE INDEX idx_answers_question_id ON answers(question_id);
+CREATE INDEX idx_answers_photos_answer_id ON answers_photos(answer_id);
+CREATE INDEX idx_questions_product_id ON questions(product_id);
+CREATE INDEX idx_questions_reported_false ON questions(reported) WHERE reported = FALSE;
