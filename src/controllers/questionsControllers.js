@@ -7,6 +7,10 @@ async function getAll(req, res) {
   res.send(data);
 }
 
+async function  createOne(req, res) {
+  res.send('Sanity');
+}
+
 async function getAllAnswersOfQuestion(req, res) {
   const { question_id } = req.params;
   const { page = 1, count = 5 } = req.query;
@@ -14,4 +18,5 @@ async function getAllAnswersOfQuestion(req, res) {
   res.send(data);
 }
 module.exports.getAll = getAll;
+module.exports.createOne = createOne;
 module.exports.getAllAnswersOfQuestion = getAllAnswersOfQuestion;

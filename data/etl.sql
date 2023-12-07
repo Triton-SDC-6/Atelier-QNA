@@ -3,7 +3,7 @@
 -- Connect to your PostgreSQL database using psql:
 --   psql -U your_username -d your_database (* make sure the database has been created already)
 -- Execute the script using the \i command in psql:
---   \i /path/to/etl.sql //(Replace /path/to/etl.sql with the actual path to this file relative to your command line.)
+--   \i /path/to/etl.sql //(Replace /path/to/etl.sql with the actual path to this file.)
 
 -- Create actual questions table if it doesn't exist
 CREATE TABLE IF NOT EXISTS questions (
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS questions (
     date_written TIMESTAMP,
     asker_name VARCHAR(255),
     asker_email VARCHAR(255),
-    reported BOOLEAN,
-    helpful INTEGER
+    reported BOOLEAN DEFAULT FALSE,
+    helpful INTEGER DEFAULT 0
 );
 
 -- Create temporary questions table
@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS answers (
     date_written TIMESTAMP,
     answerer_name VARCHAR(255),
     answerer_email VARCHAR(255),
-    reported BOOLEAN,
-    helpful INTEGER,
+    reported BOOLEAN DEFAULT FALSE,
+    helpful INTEGER DEFAULT 0,
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 

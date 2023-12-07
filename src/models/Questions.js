@@ -54,5 +54,9 @@ async function getAll(productId, page, count) {
   return combinedResults;
 }
 
+async function createOne(questionBody) {
+  const questionQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email) VALUES() RETURNING *`;
+}
+
 module.exports.pool = pool;
 module.exports.getAll = getAll;
