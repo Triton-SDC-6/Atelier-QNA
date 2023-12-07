@@ -54,4 +54,5 @@ async function getAll(productId, page, count) {
   return combinedResults;
 }
 
+module.exports.pool = pool;
 module.exports.getAll = getAll;
