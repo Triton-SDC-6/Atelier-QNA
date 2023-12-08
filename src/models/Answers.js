@@ -45,11 +45,15 @@ async function createOne(answerBody) {
 }
 
 async function helpful(answer_id) {
-
+  const helpfulQuery = `UPDATE answers SET helpful = helpful + 1 WHERE id = $1 RETURNING *`;
+  const result = await pool.query(helpfulQuery, [answer_id]);
+  return result.rows;
 }
 
 async function report(answer_id) {
-
+  const reqportQuery = `UPDATE answers SET reported = TRUE WHERE id = $1 RETURNING *`;
+  const result = await pool.query(reqportQuery, [answer_id]);
+  return result.rows;
 }
 
 module.exports.getAllByQuestionId = getAllByQuestionId;
