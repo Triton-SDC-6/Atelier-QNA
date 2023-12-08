@@ -47,7 +47,21 @@ async function createOneAnswer(req, res) {
   res.send({ answerResponse, photosResponse: photosResponse });
 }
 
+async function markQuestionHelpful(req, res) {
+  const { question_id } = req.params;
+  const data = await Questions.helpful(Number(question_id));
+  res.send(data);
+}
+
+async function reportQuestion(req, res) {
+  const { question_id } = req.params;
+  const data = await Questions.report(Number(question_id));
+  res.send(data);
+}
+
 module.exports.getAll = getAll;
 module.exports.createOneQuestion = createOneQuestion;
 module.exports.getAllAnswersOfQuestion = getAllAnswersOfQuestion;
 module.exports.createOneAnswer = createOneAnswer;
+module.exports.markQuestionHelpful = markQuestionHelpful;
+module.exports.reportQuestion = reportQuestion;

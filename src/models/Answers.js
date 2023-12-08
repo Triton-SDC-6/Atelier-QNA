@@ -44,5 +44,15 @@ async function createOne(answerBody) {
   return response.rows;
 }
 
+async function helpful(answer_id) {
+
+}
+
+async function report(answer_id) {
+
+}
+
 module.exports.getAllByQuestionId = getAllByQuestionId;
 module.exports.createOne = createOne;
+module.exports.helpful = helpful;
+module.exports.report = report;

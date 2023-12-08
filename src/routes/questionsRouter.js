@@ -4,7 +4,9 @@ const {
   getAll,
   getAllAnswersOfQuestion,
   createOneQuestion,
-  createOneAnswer
+  createOneAnswer,
+  markQuestionHelpful,
+  reportQuestion
 } = require('../controllers/questionsControllers');
 const questionBodyChecker = require('../middlewares/questionBodyChecker');
 const answerBodyChecker = require('../middlewares/answerBodyChecker');
@@ -15,4 +17,6 @@ router
   .get(getAllAnswersOfQuestion)
   .post(answerBodyChecker, createOneAnswer);
 
+router.route('/:question_id/helpful').put(markQuestionHelpful);
+router.route('/:question_id/report').put(reportQuestion);
 module.exports = router;
