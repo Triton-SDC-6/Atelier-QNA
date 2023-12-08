@@ -20,7 +20,7 @@ async function getAllByQuestionId(questionId, page, count) {
   }, {});
   const combinedResults = answers.rows.map(answer => ({
     ...answer,
-    photos: photosByAnswer[answer.id]
+    photos: photosByAnswer[answer.id] || [],
   }));
   return combinedResults;
 }
