@@ -1,5 +1,6 @@
 const Questions = require('../models/Questions');
 const Answers = require('../models/Answers');
+const Photos = require('../models/Photos');
 
 async function getAll(req, res) {
   const { product_id, page = 1, count = 5 } = req.query;
@@ -7,7 +8,7 @@ async function getAll(req, res) {
   res.send(data);
 }
 
-async function createOne(req, res) {
+async function createOneQuestion(req, res) {
   const { body, name, email, product_id } = req.body;
   const data = await Questions.createOne({
     productId: product_id,
@@ -21,9 +22,32 @@ async function createOne(req, res) {
 async function getAllAnswersOfQuestion(req, res) {
   const { question_id } = req.params;
   const { page = 1, count = 5 } = req.query;
-  const data = await Answers.getAllByQuestionId(question_id, page, count);
+  const data = await Answers.getAllByQuestionId(
+    Number(question_id),
+    page,
+    count
+  );
   res.send(data);
 }
+
+async function createOneAnswer(req, res) {
+  const { question_id } = req.params;
+  const { body, name, email, photos } = req.body;
+  const answerResponse = await Answers.createOne({
+    questionId: question_id,
+    body,
+    answererName: name,
+    answererEmail: email
+  });
+  let photosResponse = [];
+  if (photos && photos.length > 0) {
+    photosResponse = await Photos.createMany(answerResponse[0].id, photos);
+  }
+
+  res.send({ answerResponse, photosResponse: photosResponse });
+}
+
 module.exports.getAll = getAll;
-module.exports.createOne = createOne;
+module.exports.createOneQuestion = createOneQuestion;
 module.exports.getAllAnswersOfQuestion = getAllAnswersOfQuestion;
+module.exports.createOneAnswer = createOneAnswer;

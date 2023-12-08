@@ -8,9 +8,9 @@ app.use(express.json());
 app.use('/api/qa/questions', questionsRouter);
 
 app.all('*', (req, res) => {
-  res.status(404).json({message: 'resource not found.'})
+  res.status(404).json({ message: 'resource not found.' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Listen to http://localhost:${PORT}`)
+  console.log(`Listen to http://localhost:${PORT}`);
 });
