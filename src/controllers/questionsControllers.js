@@ -16,7 +16,7 @@ async function createOneQuestion(req, res) {
     askerName: name,
     askerEmail: email
   });
-  res.send(data);
+  res.status(201).send(data);
 }
 
 async function getAllAnswersOfQuestion(req, res) {
@@ -44,7 +44,7 @@ async function createOneAnswer(req, res) {
     photosResponse = await Photos.createMany(answerResponse[0].id, photos);
   }
 
-  res.send({ answerResponse, photosResponse: photosResponse });
+  res.status(201).send({ answerResponse, photosResponse: photosResponse });
 }
 
 async function markQuestionHelpful(req, res) {
