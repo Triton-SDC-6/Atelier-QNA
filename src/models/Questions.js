@@ -16,7 +16,7 @@ async function getAll(productId, page, count) {
     (page - 1) * count
   ]);
   const questionIds = questions.rows.map(question => question.id);
-  const answersQuery = 'SELECT * FROM answers WHERE question_id = ANY($1)';
+  const answersQuery = 'SELECT * FROM answers WHERE question_id = ANY($1) LIMIT 5';
   const answers = await pool.query(answersQuery, [questionIds]);
   const answersByQuestion = answers.rows.reduce((acc, answer) => {
     if (!acc[answer.question_id]) {
